@@ -188,4 +188,13 @@ void Delay(int);
 //@}
 
 
+/// @ADC Declarations
+//@{
+byte ADCFrontRight();
+byte ADCFrontLeft();
+byte ADCRearRight();
+byte ADCRearLeft();
+//@}
+
+
 #endif	// _MICRO_MOUSE_H

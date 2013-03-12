@@ -34,7 +34,7 @@ void ControlMotor(Motor motor, MotorAction action)
     
     switch (action) {
     case MOTOR_ACTION_FORWARD:
-        tpm1 = pwm;
+        tpm1 = 6000; // change back to pwm when the tachometer is connected.
         tpm2 = HIGH_WORD;
         status = MOTOR_STATUS_FORWARD;
         break;

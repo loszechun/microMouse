@@ -206,12 +206,14 @@ void main(void)
 
     PTAPE = 0xFF;   // enable port A pullups for touchbar switches and infrared sensors
     PTADD = 0x00;   // set port A as input
-
+    LineFollowing();
+    //AvoidObstacle();
+    //Test();
 /*
     tbfl = touchBarFrontLeft;
     tbfr = touchBarFrontRight;
     */
-    tbfl = 0;
+   /* tbfl = 0;
     tbfr = 0;
     if ((tbfl == 0) && (tbfr == 0)) {
         mouseMode = MOUSE_MODE_DEBUG;
@@ -228,7 +230,7 @@ void main(void)
     else {
         mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
         AvoidObstacle();
-    }
+    } */
 
     for (;;) {
         // do nothing; just waiting for interrupts
