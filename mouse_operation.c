@@ -19,64 +19,68 @@
 #include "mouse.h"	// for the declaration of types, constants, variables and functions
 
 
-void AvoidObstacle()
-{
-    mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+void AvoidObstacle() {
+   mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
 
     for (;;) {
-        // first move forward
+    
         ControlMouse(MOUSE_ACTION_FORWARD);
-
-        // first, check the status of touch bars
+        
         if (!touchBarFrontLeft && !touchBarFrontRight) {
-            // neither is touched (i.e., both the values are zero)
-
-            // then check the status of IF sensors
-            if (!infraredFrontLeft && !infraredFrontRight) {
-                // neither is touched (i.e., both the values are zero)
-                // then, back to the loop
-            }
-            else if (infraredFrontLeft) {
+        
+             if (!infraredFrontLeft && !infraredFrontRight) {
+              }
+	   
+              else if (infraredFrontLeft) {
                 // left sensor detects; avoid left obstacle
-                ControlMouse(MOUSE_ACTION_TURNRIGHT);
-            }
-            else if (infraredFrontRight) {
+				            ControlMouse(MOUSE_ACTION_TURNRIGHT);
+				            Delay(20);
+              }
+              else if (infraredFrontRight) {
                 // right sensor detects; avoid right obstacle
-                ControlMouse(MOUSE_ACTION_TURNLEFT);
-            }
-            else {
-                // both sensors detect; avoid front obstacle
-                ControlMouse(MOUSE_ACTION_STOP);
-                ControlMouse(MOUSE_ACTION_REVERSE);
-                ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
-            }
+				          	ControlMouse(MOUSE_ACTION_TURNLEFT);
+			              Delay(20);
+              }
+	            else {
+				    	ControlMouse(MOUSE_ACTION_STOP);
+				    	Delay(20);
+				    	ControlMouse(MOUSE_ACTION_REVERSE);
+				    	ControlMouse(MOUSE_ACTION_STOP);
+				    	Delay(20);
+			        ControlMouse(MOUSE_ACTION_TURNAROUND);
+				    	Delay(20);
+			        } 
         }
+         
         else if (touchBarFrontLeft) {
-            // left bar is touched; avoid left obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNRIGHT);
-        }
-        else if (touchBarFrontRight) {
-            // right bar is touched; avoid right obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNLEFT);
-        }
-        else {
-            // both bars are touched; avoid front obstacle
-            ControlMouse(MOUSE_ACTION_STOP);
-            ControlMouse(MOUSE_ACTION_REVERSE);
-            ControlMouse(MOUSE_ACTION_TURNAROUND);	// 180 dgree turn
-        }
-    } // end of for() loop
-}
+        	ControlMouse(MOUSE_ACTION_STOP);
+				  Delay(20);
+				 	ControlMouse(MOUSE_ACTION_REVERSE);
+				  ControlMouse(MOUSE_ACTION_STOP);
+				  Delay(20);
+          ControlMouse(MOUSE_ACTION_TURNRIGHT);
+				  Delay(20);
+        } 
+        
+        else if (touchBarFrontRight){
+          ControlMouse(MOUSE_ACTION_STOP);
+				  Delay(20);
+				 	ControlMouse(MOUSE_ACTION_REVERSE);
+				 	ControlMouse(MOUSE_ACTION_STOP);
+				  Delay(20);
+        	ControlMouse(MOUSE_ACTION_TURNLEFT);
+			    Delay(20);
+        } 
+	     }
+    }
 
+void LineFollowing(){
+      
+  byte LSFRight, LSFLeft, LSRRight, LSRLeft;
 
-void LineFollowing ()
-{
-    mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
-
+  mouseMode = MOUSE_MODE_OBSTACLE_AVOIDING;
+    
+  
     for (;;) {
         // first move forward
         ControlMouse(MOUSE_ACTION_FORWARD);
@@ -235,6 +239,9 @@ void Test()
   
   while (1) {
     ControlMouse(MOUSE_ACTION_FORWARD);
+   // Delay(opDelay);
+  /*
+    ControlMouse(MOUSE_ACTION_FORWARD);
     Delay(opDelay);
     ControlMouse(MOUSE_ACTION_REVERSE);
     Delay(opDelay);
@@ -246,6 +253,16 @@ void Test()
     Delay(opDelay);
     ControlMouse(MOUSE_ACTION_STOP);
     Delay(opDelay);
-
+    */
   }
+}
+
+
+// ADC test mode for line following sensors
+void ADCTest()
+{
+    while (1)
+    {
+        ADCRead();
+    }
 }
